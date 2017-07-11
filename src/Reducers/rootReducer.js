@@ -11,6 +11,7 @@ import { combineReducers } from 'redux';
 // import each reducer here.
     // First: import the studentReducer
 import StudentReducer from './StudentReducer';
+import SelectedStudent from './SelectedStudentReducer';
 
 
 // create a rootReducer using the combineReducer method, so we can export it
@@ -18,7 +19,8 @@ import StudentReducer from './StudentReducer';
 const rootReducer = combineReducers({
     // inside here we pass each reducer as a key/value
     // each key will be available as a piece of state later
-    students: StudentReducer
+    students: StudentReducer,
+    selectedStudent: SelectedStudent
 });
 
 export default rootReducer;
