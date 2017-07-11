@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 // we need some glue between react and redux. this component/container
 // needs to know about redux state. the answer? the connect method from the
 // react-redux module. the glue
+// the connect method is like a waiter that communicates between customer and cook(react and redux)
 import {connect} from 'react-redux';
 
 // Get our actions...
@@ -16,14 +17,27 @@ import SelectStudent from '../actions/SelectStudentAction';
 import {bindActionCreators} from 'redux';
 
 
+import Timer from '../actions/TimerActions';
+
+
 
 // ReduxStudents is an extenstion of Component. Means that everything Component has ReduxStudents has
 // use 'super(props)' to have the ability to apply things from ReduxStudents to Component
 class ReduxStudents extends Component{
+    constructor(props){
+        super(props);
+    }
+
+    componentDidMount(){
+        // use the rocket here because this function does not use its own 'this'
+        setInterval(()=>{
+            this.props.timerAction()
+        },1000)
+    }
 
     render(){
         // getting students from mapStateToProps, comes from rootReducer which contains studentReducer
-        console.log(this.props.students);
+        // console.log(this.props.students);
         var studentArray = [];
         this.props.students.map((student,index)=>{
             studentArray.push(
@@ -37,8 +51,11 @@ class ReduxStudents extends Component{
                 <h1>This is ReduxStudents</h1>
                 {studentArray}
                 <hr />
-                {/*'this.props. ... comes from below in the return of 'mapStateToProps' function*/}
+                {/*'this.props. ... comes from below in the return of 'mapStateToProps' function
+                that is mapping redux state and allows us to use state*/}
                 {this.props.selectedStudent} is Selected.
+                <hr />
+                {this.props.timer} is the apps current time.
             </div>
         )
     }
@@ -55,14 +72,18 @@ function mapStateToProps(state) {
         // this exists because we made it a prop in the root reducer
         students: state.students,
         // created in rootReducer and added state here
-        selectedStudent: state.selectedStudent
+        selectedStudent: state.selectedStudent,
+        timer: state.timer
     };
 }
     // mapDispatchToProps goes out to the dispatcher, grabs an action from it and sets
-    // it as a prop this component
+    // it as a prop to this component
 function mapDispatchToProps(dispatch){
     return bindActionCreators({
-        selectStudent: SelectStudent
+        // these are called in the component with 'this.props. ... '
+        selectStudent: SelectStudent,
+        timerAction: Timer
+        // below means send out to dispatcher
     },dispatch)
 }
 

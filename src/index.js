@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+// if importing the default you can call it whatever you want...
 import ReduxStudents from './Containers/ReduxStudents';
 
 
