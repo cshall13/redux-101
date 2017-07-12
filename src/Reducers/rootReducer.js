@@ -13,6 +13,7 @@ import { combineReducers } from 'redux';
 import StudentReducer from './StudentReducer';
 import SelectedStudent from './SelectedStudentReducer';
 import TimerReducer from './TimerReducer';
+import WeatherReducer from './WeatherReducer';
 
 
 // create a rootReducer using the combineReducer method, so we can export it
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
     // each key will be available as a piece of state later
     students: StudentReducer,
     selectedStudent: SelectedStudent,
-    timer: TimerReducer
+    timer: TimerReducer,
+    weather: WeatherReducer
 });
 
 export default rootReducer;

@@ -29,8 +29,9 @@ class ReduxStudents extends Component{
     }
 
     componentDidMount(){
-        // use the rocket here because this function does not use its own 'this'
+        // ***********use the rocket here because this function does not use its own 'this'
         setInterval(()=>{
+            // ************added by a redux action (mapStateToProps) which gives it state
             this.props.timerAction()
         },1000)
     }
@@ -55,7 +56,7 @@ class ReduxStudents extends Component{
                 that is mapping redux state and allows us to use state*/}
                 {this.props.selectedStudent} is Selected.
                 <hr />
-                {this.props.timer} is the apps current time.
+                {/*{this.props.timer} is the apps current time.*/}
             </div>
         )
     }
